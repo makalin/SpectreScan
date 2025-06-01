@@ -19,11 +19,6 @@ git clone https://github.com/makalin/SpectreScan.git
 cd SpectreScan
 ```
 
-For mobile setup, open the project in your preferred IDE:
-
-* Android: Android Studio
-* iOS: Xcode
-
 Install dependencies:
 
 ```bash
@@ -32,32 +27,88 @@ npm install
 yarn install
 ```
 
+For iOS, install pods:
+```bash
+cd ios && pod install
+```
+
 ## 📊 Tech Stack
 
 * **Frontend:** React Native
-* **Image Processing:** OpenCV
+* **Camera:** react-native-vision-camera
+* **Navigation:** @react-navigation/native
+* **Image Processing:** Custom native modules
 * **Machine Learning:** TensorFlow Lite (for glint classification)
 * **Optional:** ARKit / LIDAR SDK (iOS Pro models)
 
-## 📝 Usage
-
-1. Launch the app.
-2. Dim the lights for optimal detection.
-3. Press 'Start Scan' and slowly sweep your camera across the room.
-4. Marked reflections and anomalies will be highlighted.
-
-## 🔧 Project Structure
+## 🏗️ Project Structure
 
 ```
 SpectreScan/
-├── assets/            # Logos, Icons
 ├── src/
-│   ├── components/     # UI Components
-│   ├── services/      # IR and LIDAR services
-│   └── utils/          # Helper functions
+│   ├── components/
+│   │   └── CameraView.tsx      # Main camera interface
+│   ├── services/
+│   │   └── IRDetectionService.ts  # IR detection logic
+│   ├── utils/
+│   │   └── imageProcessing.ts  # Image processing utilities
+│   ├── config.ts              # App configuration
+│   └── App.tsx               # Main application component
+├── assets/                   # Logos, Icons
 ├── README.md
 └── package.json
 ```
+
+## 🔧 Configuration
+
+The application can be configured through `src/config.ts`:
+
+* Camera settings (FPS, resolution)
+* IR detection parameters
+* LIDAR settings (for Pro models)
+* UI customization
+* App metadata
+
+## 📝 Usage
+
+1. Launch the app
+2. Grant camera permissions when prompted
+3. Dim the lights for optimal detection
+4. Press 'Start Scan' and slowly sweep your camera across the room
+5. Detected reflections will be highlighted with red markers
+
+## 🛠️ Development
+
+### Prerequisites
+
+* Node.js >= 14
+* React Native development environment
+* iOS: Xcode 12+
+* Android: Android Studio 4+
+
+### Building
+
+```bash
+# iOS
+npm run ios
+
+# Android
+npm run android
+```
+
+### Testing
+
+```bash
+npm test
+```
+
+## 🔒 Permissions
+
+The app requires the following permissions:
+
+* Camera access
+* Storage access (for saving scan results)
+* LIDAR access (Pro models only)
 
 ## 🙌 Contributing
 
